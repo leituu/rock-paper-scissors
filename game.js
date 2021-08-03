@@ -16,28 +16,28 @@ const chooseWeapon = () => {
 
 // Game Logic - Play
 
-while (matchCount <= 5) {
+while (matchCount < 5) {
     let play = chooseWeapon();
     if ((play["human"] == "Rock" && play["computer"] == "Scissors")
         || (play["human"] == "Scissors" && play["computer"] == "Paper") 
         || (play["human"] == "Paper" && play["computer"] == "Rock")) {
-        console.log(`${play["human"]} beats ${play["computer"]} => ${humanWins} - ${computerWins}`);
         matchCount += 1;
         humanWins += 1;
+        console.log(`You win, ${play["human"]} beats ${play["computer"]} => ${humanWins} - ${computerWins}`);
     } else if ((play["human"] == "Rock" && play["computer"] == "Paper")
                 || (play["human"] == "Scissors" && play["computer"] == "Rock") 
                 || (play["human"] == "Paper" && play["computer"] == "Scissors")) {
-                    console.log(`${play["computer"]} beats ${play["human"]}`);
                     matchCount += 1;
-                    computerWins =+ 1;
-                    console.log(`${humanWins} - ${computerWins}`);
+                    computerWins += 1;
+                    console.log(`You lose, ${play["computer"]} beats ${play["human"]} => ${humanWins} - ${computerWins}`);
                 }
-    else {console.log('It\'s a tie');
-            console.log(`${humanWins} - ${computerWins}`);}
+    else {console.log(`It\'s a tie => ${humanWins} - ${computerWins}`);}
     ;
-    console.log(object);
-    // console.log(play["computer"] + ' vs ' + play["human"]);
+    console.log(matchCount);
 }
 
+if (humanWins > computerWins) {
+    console.log("You win");
+} else {console.log("You lose :( try again!");}
 // console.log(`${humanWins} - ${computerWins}`);
 
