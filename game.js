@@ -13,7 +13,7 @@ let computerWins = 0;
 let weapon = document.querySelector('#elements');
 let status = document.querySelector('#result-game');
 let result_cont = document.querySelector('#result-counter');
-let result = document.createElement('p');
+// let result = document.createElement('p');
 
 weapon.addEventListener('click',chooseWeapon);
 
@@ -21,25 +21,28 @@ weapon.addEventListener('click',chooseWeapon);
 
 function chooseWeapon(event) {
     if (humanWins < 3 && computerWins < 3) {
-        play["human"] = event.target.textContent;
-        play["computer"] = elements[parseInt(Math.random() * 2 + 1)];
-        // console.log(play);
+        play["human"] = event.target['alt'];
+        play["computer"] = elements[parseInt(Math.round(Math.random() * 2 + 1))];
+        // Human win
         if ((play["human"] == "Rock" && play["computer"] == "Scissors")
             || (play["human"] == "Scissors" && play["computer"] == "Paper") 
             || (play["human"] == "Paper" && play["computer"] == "Rock")) {
             matchCount += 1;
             humanWins += 1;
+            let result = document.createElement('p');
             result.textContent = `${humanWins} - ${computerWins}`;
             result_cont.appendChild(result);
             status.textContent = `You win, ${play["human"]} beats ${play["computer"]}`;
+        // Computer win
         } else if ((play["human"] == "Rock" && play["computer"] == "Paper")
                     || (play["human"] == "Scissors" && play["computer"] == "Rock") 
                     || (play["human"] == "Paper" && play["computer"] == "Scissors")) {
                         matchCount += 1;
                         computerWins += 1;
-                        status.textContent = `You lose, ${play["computer"]} beats ${play["human"]}`;
+                        let result = document.createElement('p');
                         result.textContent = `${humanWins} - ${computerWins}`;
                         result_cont.appendChild(result);
+                        status.textContent = `You lose, ${play["computer"]} beats ${play["human"]}`;
                     }
         else {status.textContent = `It\'s a tie`;}
         ;
@@ -60,7 +63,9 @@ reset.addEventListener('click', () => {
     humanWins = 0;
     computerWins = 0;
     status.textContent = "";
-    result_cont.removeChild(result)
+    while (result_cont.hasChildNodes()) {
+        result_cont.removeChild(result_cont.lastChild);
+    }
     console.clear()})
     
 
