@@ -32,6 +32,8 @@ function chooseWeapon(event) {
             let result = document.createElement('p');
             result.textContent = `${humanWins} - ${computerWins}`;
             result_cont.appendChild(result);
+            result.classList.add("result-text")
+            status.classList.add("result-text");
             status.textContent = `You win, ${play["human"]} beats ${play["computer"]}`;
         // Computer win
         } else if ((play["human"] == "Rock" && play["computer"] == "Paper")
@@ -42,9 +44,14 @@ function chooseWeapon(event) {
                         let result = document.createElement('p');
                         result.textContent = `${humanWins} - ${computerWins}`;
                         result_cont.appendChild(result);
+                        result.classList.add("result-text")
+                        status.classList.add("result-text");
                         status.textContent = `You lose, ${play["computer"]} beats ${play["human"]}`;
                     }
-        else {status.textContent = `It\'s a tie`;}
+        else {
+            status.classList.add("result-text");
+            status.textContent = `It\'s a tie`;
+            result.classList.add("result-text")}
         ;
     }
     if(humanWins == 3) {
@@ -52,7 +59,8 @@ function chooseWeapon(event) {
     } else if (computerWins == 3) {
         status.textContent = 'Computer Wins'
     }
-
+    setTimeout(()=>{result.classList.remove("result-text")
+                    status.classList.remove("result-text")},900)
 }
 
 // Restart
@@ -63,6 +71,7 @@ reset.addEventListener('click', () => {
     humanWins = 0;
     computerWins = 0;
     status.textContent = "";
+    status.classList.remove('result-text')
     while (result_cont.hasChildNodes()) {
         result_cont.removeChild(result_cont.lastChild);
     }
